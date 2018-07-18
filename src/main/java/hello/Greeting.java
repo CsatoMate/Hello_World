@@ -3,11 +3,11 @@ package hello;
 public class Greeting {
 
     private final long id;
-    private final String content;
+    private final String greeting;
 
-    public Greeting(long id, String content) {
+    Greeting(long id,String greeting) {
         this.id = id;
-        this.content = content;
+        this.greeting = greeting;
     }
 
     public long getId() {
@@ -15,6 +15,6 @@ public class Greeting {
     }
 
     public String getContent() {
-        return content;
+        return greeting;
     }
 }
