@@ -1,30 +1,29 @@
 package hello;
 
-import java.util.concurrent.atomic.AtomicLong;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class GreetingController {
 
     private static final String template = "Hello, %s!";
-    //private final AtomicLong counter = new AtomicLong();
-
-    @RequestMapping("/greeting")
-    public Greeting variableName(@RequestParam(value="name", defaultValue="World") String name) {
-        return new Greeting(//counter.incrementAndGet(),
-                String.format(template, name));
-    }
-
-    @RequestMapping("/greeting/api")
-    public Greeting defaultString(@RequestParam(value="name", defaultValue="World") String name) {
-        return new Greeting(//counter.incrementAndGet(),
-                String.format(template, name));
-    }
+    private UpperFirstLetter ufl = new UpperFirstLetter();
 
     @RequestMapping("/")
     public String index() {
         return "Greetings from Spring Boot!";
     }
+
+    @RequestMapping("/api/greeting")
+    public String apigreeting() {
+        return "Hello JSON";
+    }
+
+    @RequestMapping("/api/greeting/{usernames}")
+    public Greeting greeting(@PathVariable(value = "usernames") String name) {
+        return new Greeting(String.format(template, ufl.MakeUpper(name)));
+    }
 }
+
+
